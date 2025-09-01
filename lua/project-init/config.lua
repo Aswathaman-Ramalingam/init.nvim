@@ -8,6 +8,9 @@ local defaults = {
     angular = { label = "Angular" },
     vue = { label = "Vue" },
   },
+  post_actions = {
+    open_dir = true,
+  },
 }
 
 local user = {}

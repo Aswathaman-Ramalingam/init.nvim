@@ -22,11 +22,25 @@ Commands
 --------
 
 - `:Init` — Open the project initializer picker.
+- `:InitStacks` — Show available stacks.
 
 Configuration
 -------------
 
 You can pass a config table to `require('project-init').setup({ ... })` with custom stacks.
+
+Example:
+
+```lua
+require('project-init').setup({
+  stacks = {
+    react = { label = 'React (CRA)' },
+  },
+  post_actions = {
+    open_dir = true,
+  },
+})
+```
 
 License
 -------

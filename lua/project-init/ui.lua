@@ -32,6 +32,13 @@ local function run_generator(generator_key)
   end
 
   generator.run({ name = name, path = path, config = config.get() })
+
+  local cfg = config.get()
+  if cfg.post_actions and cfg.post_actions.open_dir then
+    local target = path .. "/" .. name
+    vim.cmd("lcd " .. vim.fn.fnameescape(target))
+    vim.notify("Changed directory to " .. target)
+  end
 end
 
 function M.open_picker()
@@ -80,6 +87,14 @@ function M.open_picker()
       run_generator(items[idx].key)
     end
   end
+end
+
+function M.list_stacks()
+  local items = {}
+  for key, meta in pairs(config.get().stacks) do
+    table.insert(items, string.format("%s - %s", key, meta.label))
+  end
+  vim.notify(table.concat(items, "\n"))
 end
 
 return M
