@@ -23,6 +23,7 @@ Commands
 
 - `:Init` — Open the project initializer picker.
 - `:InitStacks` — Show available stacks.
+- `:InitHere` — Initialize a project in the current working directory.
 
 Configuration
 -------------

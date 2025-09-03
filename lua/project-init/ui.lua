@@ -26,7 +26,14 @@ local function run_generator(generator_key)
     return
   end
 
-  local path = prompt_input("Directory (absolute)", vim.loop.cwd())
+  local forced_path = rawget(_G, "__project_init_override_path")
+  if forced_path then _G.__project_init_override_path = nil end
+  local path
+  if forced_path and forced_path ~= "" then
+    path = forced_path
+  else
+    path = prompt_input("Directory (absolute)", vim.loop.cwd())
+  end
   if path == nil or path == "" then
     path = vim.loop.cwd()
   end
@@ -41,7 +48,8 @@ local function run_generator(generator_key)
   end
 end
 
-function M.open_picker()
+function M.open_picker(opts)
+  opts = opts or {}
   local items = {}
   for key, meta in pairs(config.get().stacks) do
     table.insert(items, { key = key, label = meta.label })
@@ -67,11 +75,13 @@ function M.open_picker()
         map("i", "<CR>", function(prompt_bufnr)
           local selection = action_state.get_selected_entry()
           actions.close(prompt_bufnr)
+          if opts.path then _G.__project_init_override_path = opts.path end
           run_generator(selection.value)
         end)
         map("n", "<CR>", function(prompt_bufnr)
           local selection = action_state.get_selected_entry()
           actions.close(prompt_bufnr)
+          if opts.path then _G.__project_init_override_path = opts.path end
           run_generator(selection.value)
         end)
         return true
@@ -84,6 +94,7 @@ function M.open_picker()
     end
     local idx = vim.fn.inputlist(vim.list_extend({ "Select stack:" }, choices))
     if idx and idx > 0 and idx <= #items then
+      if opts.path then _G.__project_init_override_path = opts.path end
       run_generator(items[idx].key)
     end
   end
