@@ -9,6 +9,7 @@ Quick start
 1. Add to your runtime path or plugin manager.
 2. Ensure dependencies are available in `$PATH` (npm, npx, mvn, etc.).
 3. Launch `:Init` and pick a stack.
+4. Use `:InitHere` to initialize in the current directory.
 
 Features
 --------
@@ -17,6 +18,7 @@ Features
 - Prompts for project name and target directory.
 - Executes scaffold commands using system tools.
 - Extensible generators via `lua/project-init/generators/`.
+- Optional post-action to change directory into the new project.
 
 Commands
 --------
