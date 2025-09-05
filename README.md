@@ -19,6 +19,7 @@ Features
 - Executes scaffold commands using system tools.
 - Extensible generators via `lua/project-init/generators/`.
 - Optional post-action to change directory into the new project.
+- WIP: Optional integration with `dashboard.nvim` (toggle via `integrations.dashboard.enabled`).
 
 Commands
 --------
@@ -41,6 +42,9 @@ require('project-init').setup({
   },
   post_actions = {
     open_dir = true,
+  },
+  integrations = {
+    dashboard = { enabled = false },
   },
 })
 ```

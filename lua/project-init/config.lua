@@ -11,6 +11,11 @@ local defaults = {
   post_actions = {
     open_dir = true,
   },
+  integrations = {
+    dashboard = {
+      enabled = false,
+    },
+  },
 }
 
 local user = {}
